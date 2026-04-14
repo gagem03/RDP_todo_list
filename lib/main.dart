@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/screens/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'package:myapp/providers/task_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage()
+    return ChangeNotifierProvider(
+      create: (context) => TaskProvider(),
+      child: HomePage(),
     );
   }
 }

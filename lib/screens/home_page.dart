@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:myapp/models/task_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +24,16 @@ class _HomePageState extends State<HomePage> {
           ],
         )
       ),
-      drawer: Drawer()
+      drawer: Drawer(),
+      body: 
+      Column(children: [
+        TableCalendar(
+          calendarFormat: CalendarFormat.month,
+          focusedDay: DateTime.now(),
+          firstDay: DateTime(2026),
+          lastDay: DateTime(2027)
+        ),
+      ])
     );
   }
 }
