@@ -8,7 +8,7 @@ class TaskProvider extends ChangeNotifier {
   final db = FirebaseFirestore.instance;
   List<Task> tasks = [];
 
-  // add task
+  // load task on init state
   Future<void> load(String name) async {
     try {
       // database part where we load persisted tasks
@@ -22,6 +22,16 @@ class TaskProvider extends ChangeNotifier {
       )).toList();
       notifyListeners();
     } catch(e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> add(String name) async {
+    try {
+      if (name.trim().isNotEmpty) {
+        
+      }
+    } catch (e) {
       print('Error: $e');
     }
   }
