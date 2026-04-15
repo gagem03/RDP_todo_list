@@ -10,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +20,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => TaskProvider(),
-      child: HomePage(),
+      child: MaterialApp(
+        home: HomePage()
+      )
     );
   }
 }
+
+// ChangeNotifierProvider(
+    //   create: (context) => TaskProvider(),
+    //   child: HomePage(),
+    // );
