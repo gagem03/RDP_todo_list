@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         ),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: ScrollPhysics(),
           itemCount: tp.tasks.length,
           itemBuilder: (context, i) {
             final task = tp.tasks[i];
@@ -54,14 +54,47 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-              tileColor: i.isEven ? Colors.deepPurpleAccent : Colors.grey,
+              tileColor: i.isEven ? Colors.lightGreen : Colors.deepPurpleAccent,
               leading: Icon(task.completed ? Icons.check_circle : Icons.circle_outlined),
               title: Text(task.title.toString(), style: TextStyle(
                 fontSize: 22,
                 decoration: task.completed ? TextDecoration.lineThrough : null
-              ))
+              )),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Checkbox(
+                    value: task.completed,
+                    onChanged: (value) => tp.update(i, value!)
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => tp.delete(i),
+                  ),
+                ],
+              )
             );
-          })
+          }),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(children: [
+                Expanded(
+                  child: TextField(
+                    maxLength: 32,
+                    controller: input,
+                    decoration: const InputDecoration(
+                      labelText: 'Add Task',
+                      border: OutlineInputBorder()
+                    )
+                  ),
+                ),
+                ElevatedButton(
+                  child: Text('Add'),
+                  onPressed: () => tp.add(input.text)
+                )
+              ]
+                        ),
+            )
       ])
     );
   }

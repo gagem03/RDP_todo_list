@@ -46,7 +46,7 @@ class TaskProvider extends ChangeNotifier {
   Future<void> update(int i, bool completed) async {
     try {
       // update the database state using index ancd completed status
-      await db.collection('tasks').doc(tasks[i].id).update({completed: completed});
+      await db.collection('tasks').doc(tasks[i].id).update({'completed': completed});
       // update the local state using same details
       tasks[i] = Task(id: tasks[i].id, title: tasks[i].title, completed: completed);
       notifyListeners();
